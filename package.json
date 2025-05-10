@@ -1,0 +1,26 @@
+{
+  "name": "typescript-project",
+  "version": "1.0.0",
+  "description": "A TypeScript project.",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/typescript-project.git"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yourusername/typescript-project/issues"
+  },
+  "homepage": "https://github.com/yourusername/typescript-project#readme"
+}
