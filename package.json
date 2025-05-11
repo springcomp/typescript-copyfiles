@@ -22,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/yourusername/typescript-project/issues"
   },
-  "homepage": "https://github.com/yourusername/typescript-project#readme"
+  "homepage": "https://github.com/yourusername/typescript-project#readme",
+  "dependencies": {
+    "glob": "^11.0.2",
+    "minimatch": "^10.0.1",
+    "mkdirp": "^3.0.1",
+    "noms": "^0.0.0",
+    "through2": "^4.0.2",
+    "untildify": "^5.0.0"
+  }
 }
