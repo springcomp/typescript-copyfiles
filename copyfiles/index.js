@@ -4,6 +4,7 @@ var fs = require('fs');
 var glob = require('glob');
 var mkdirp = require('mkdirp');
 var untildify = require('untildify');
+const { debug } = require('console');
 var through = require('through2').obj;
 var noms = require('noms').obj;
 function toStream(array) {
@@ -34,6 +35,7 @@ function dealWith(inPath, up) {
 }
 var copyFile = _copyFile;
 function _copyFile(src, dst, opts, callback) {
+  console.log('using _copyFile');
   fs.createReadStream(src)
     .pipe(
       fs.createWriteStream(dst, {
@@ -43,14 +45,12 @@ function _copyFile(src, dst, opts, callback) {
     .once('error', callback)
     .once('finish', function () {
       fs.chmod(dst, opts.mode, function (err) {
+        debug('chmod');
         callback(err);
+        debug('chmoded');
       });
     });
-}
-if (fs.copyFile) {
-  copyFile = function (src, dst, opts, callback) {
-    fs.copyFile(src, dst, callback);
-  };
+  console.log('done using _copyFile');
 }
 function makeDebug(config) {
   if (config.verbose) {
@@ -173,6 +173,7 @@ function copyFiles(args, config, callback) {
       if (config.error && !copied) {
         return callback(new Error('nothing coppied'));
       }
+      debug('finish');
       callback();
     });
 }
