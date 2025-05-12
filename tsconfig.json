@@ -1,13 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "NodeNext",
-    "strict": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2020", "dom"],
+    "moduleResolution": "node",
+    "module": "esnext",
+    "isolatedModules": true,
     "esModuleInterop": true,
+    "target": "es6",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "outDir": "dist/lib",
+    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "dist", "test"],
+  "include": ["src", "bin"]
 }
