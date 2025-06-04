@@ -5,12 +5,10 @@
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "bin": {
+    "copyup": "dist/bin/copyfiles.js",
     "copyfiles": "dist/bin/copyfiles.js"
   },
-  "files": [
-    "dist",
-    "dist/types"
-  ],
+  "files": ["dist", "dist/types"],
   "type": "module",
   "scripts": {
     "prebuild": "npx rimraf dist",
