@@ -52,7 +52,7 @@ const args = yargs(process.argv.slice(2)).options({
     default: false,
   },
 });
-if (path.basename(process.argv[0]) === 'copyup') {
+if (path.basename(process.argv[1]) === 'copyup') {
   args.default('u', 1);
 }
 const argv = args.parseSync();
