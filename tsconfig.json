@@ -26,6 +26,6 @@
     "strictNullChecks": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["node_modules", "dist", "test"],
-  "include": ["src", "bin"]
+  "exclude": ["node_modules", "dist"],
+  "include": ["src", "bin", "test"]
 }

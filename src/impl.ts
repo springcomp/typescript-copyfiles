@@ -49,6 +49,8 @@ export class CopyFilesStreamHandler {
     const stat = new StatTransform(outDir, soft, up, logger);
     const copy = new CopyTransform(status, logger);
 
+    logger(JSON.stringify(options));
+
     stream
       .on('data', chunk => {
         const pathName = chunk.toString();
