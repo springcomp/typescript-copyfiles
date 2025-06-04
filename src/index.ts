@@ -46,14 +46,4 @@ export function copyFiles(args: string[], config: CopyFilesOptions | Callback, c
   handler.copyFiles(args, callback, config);
 }
 
-//const array = ['~/projects/cp/dist/index.js', '~/projects/cp/copyfiles/test/test.fromNode.js', '~/projects/cp/out/'];
-//const options: CopyFilesOptions = { error: true, flat: true, up: true, verbose: true };
-//const callback = (err?: NodeJS.ErrnoException | null) => {
-//  if (err) {
-//    console.log(err);
-//  }
-//  console.log('done');
-//};
-//
-//copyFiles(array, options, callback);
-//
+export default copyFiles;

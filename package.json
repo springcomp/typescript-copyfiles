@@ -31,7 +31,9 @@
   },
   "homepage": "https://github.com/yourusername/typescript-copyfiles#readme",
   "dependencies": {
+    "@types/yargs": "^17.0.33",
     "glob": "^11.0.2",
-    "mkdirp": "^3.0.1"
+    "mkdirp": "^3.0.1",
+    "yargs": "^17.7.2"
   }
 }

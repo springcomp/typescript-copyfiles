@@ -1,66 +1,80 @@
 #!/usr/bin/env node
-import { ParseArgsConfig, parseArgs } from 'node:util';
-import pkg from '../package.json' assert { type: 'json' };
 
-const args = getArgs();
+import path from 'path';
+import yargs from 'yargs';
+import copyfiles, { CopyFilesOptions } from '../src/index.js';
 
-if (args.values.help) {
-  printHelp();
+const args = yargs(process.argv.slice(2)).options({
+  a: {
+    type: 'boolean',
+    alias: 'all',
+    describe: 'include files & directories beginning with a dot (.)',
+    default: false,
+  },
+  e: {
+    type: 'string',
+    alias: 'exclude',
+    describe: 'pattern or glob to exclude (multiple times)',
+  },
+  E: {
+    type: 'boolean',
+    alias: 'error',
+    describe: 'throw error if nothing is copied',
+    default: false,
+  },
+  f: {
+    type: 'boolean',
+    alias: 'flat',
+    describe: 'flatten the output',
+    default: false,
+  },
+  F: {
+    type: 'boolean',
+    alias: 'follow',
+    describe: 'follow symbolic links',
+    default: false,
+  },
+  s: {
+    type: 'boolean',
+    alias: 'soft',
+    describe: 'do not overwrite destination files if they exist',
+    default: false,
+  },
+  u: {
+    alias: 'up',
+    describe: 'slice a path off the bottom of the paths',
+    default: 0,
+  },
+  V: {
+    type: 'boolean',
+    alias: 'verbose',
+    describe: 'print more information to console',
+    default: false,
+  },
+});
+if (path.basename(process.argv[0]) === 'copyup') {
+  args.default('u', 1);
+}
+const argv = args.parseSync();
+if (argv.flat) {
+  argv.up = true;
+}
+
+const options: CopyFilesOptions = {
+  all: argv.a,
+  error: argv.E,
+  exclude: argv.e ? (Array.isArray(argv.e) ? argv.e : [argv.e]) : undefined,
+  flat: argv.f,
+  follow: argv.F,
+  soft: argv.s,
+  up: argv.up === true ? true : argv.u,
+  verbose: argv.V,
+};
+
+copyfiles(argv._.map(String), options, err => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
   process.exit(0);
-}
-
-if (!args.values['expr-file'] && args.positionals.length < 1) {
-  console.log('Must provide a jmespath expression.');
-  process.exit(1);
-}
-
-if (args.values['expr-file']) {
-} else {
-}
-
-function getArgs() {
-  const config: ParseArgsConfig = {
-    options: {
-      compact: {
-        type: 'boolean',
-        short: 'c',
-        default: false,
-      },
-      help: {
-        type: 'boolean',
-        short: 'h',
-        default: false,
-      },
-      filename: {
-        type: 'string',
-        short: 'f',
-      },
-      'expr-file': {
-        type: 'string',
-        short: 'e',
-      },
-    },
-    allowPositionals: true,
-  };
-
-  return parseArgs(config);
-}
-
-function printHelp(): void {
-  console.log(`
-NAME:
-jp - jp [<options>] <expression>
-
-USAGE:
-  jp [global options] command [command options] [arguments...]
-
-VERSION:
-  ${pkg.name}@${pkg.version}
-
-OPTIONS:
-  --compact, -c                Produce compact JSON output that omits nonessential whitespace.
-  --filename value, -f value   Read input JSON from a file instead of stdin.
-  --expr-file value, -e value  Read JMESPath expression from the specified file.
-  --help, -h                   Show help
-`);
-}
+});
