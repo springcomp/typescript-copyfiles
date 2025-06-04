@@ -7,10 +7,7 @@
   "bin": {
     "copyfiles": "dist/bin/copyfiles.js"
   },
-  "files": [
-    "dist",
-    "dist/types"
-  ],
+  "files": ["dist", "dist/types"],
   "type": "module",
   "scripts": {
     "prebuild": "npx rimraf dist",
@@ -29,15 +26,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/typescript-copyfiles.git"
+    "url": "git+https://github.com/springcomp/typescript-copyfiles.git"
   },
   "keywords": [],
   "author": "Springcomp",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/typescript-copyfiles/issues"
+    "url": "https://github.com/springcomp/typescript-copyfiles/issues"
   },
-  "homepage": "https://github.com/yourusername/typescript-copyfiles#readme",
+  "homepage": "https://github.com/springcomp/typescript-copyfiles#readme",
   "dependencies": {
     "@types/yargs": "^17.0.33",
     "glob": "^11.0.2",
