@@ -1,6 +1,6 @@
 {
   "name": "@springcomp/typescript-copyfiles",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Copy files easily.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
