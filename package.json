@@ -1,13 +1,16 @@
 {
   "name": "@springcomp/typescript-copyfiles",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Copy files easily.",
   "main": "dist/lib/src/index.js",
   "types": "dist/lib/src/index.d.ts",
   "bin": {
     "copyfiles": "dist/lib/bin/copyfiles.js"
   },
-  "files": ["dist/lib", "dist/types"],
+  "files": [
+    "dist/lib",
+    "dist/types"
+  ],
   "type": "module",
   "scripts": {
     "prebuild": "npx rimraf dist",
