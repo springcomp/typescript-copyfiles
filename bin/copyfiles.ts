@@ -59,6 +59,10 @@ const argv = args.parseSync();
 if (argv.flat) {
   argv.up = true;
 }
+if (process.argv.length < 3) {
+  args.showHelp();
+  process.exit(1);
+}
 
 const options: CopyFilesOptions = {
   all: argv.a,
