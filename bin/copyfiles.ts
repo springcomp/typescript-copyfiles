@@ -13,6 +13,7 @@ const args = yargs(process.argv.slice(2)).options({
   },
   e: {
     type: 'string',
+    array: true,
     alias: 'exclude',
     describe: 'pattern or glob to exclude (multiple times)',
   },
@@ -67,7 +68,7 @@ if (process.argv.length < 3) {
 const options: CopyFilesOptions = {
   all: argv.a,
   error: argv.E,
-  exclude: argv.e ? (Array.isArray(argv.e) ? argv.e : [argv.e]) : undefined,
+  exclude: argv.e?.map(String),
   flat: argv.f,
   follow: argv.F,
   soft: argv.s,
