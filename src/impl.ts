@@ -1,10 +1,9 @@
+import fs from 'node:fs';
 import os from 'node:os';
+import path from 'node:path';
 import { Readable, ReadableOptions, Transform, TransformCallback } from 'stream';
 import { Callback, CopyFilesOptions } from './index.js';
-import fs from 'fs';
 import { glob, GlobOptions } from 'tinyglobby';
-import { mkdirp } from 'mkdirp';
-import path from 'path';
 
 type GlobOptionsWithPatternsUnset = Omit<GlobOptions, 'patterns'>;
 type CopyStatus = { copied: boolean };
@@ -218,4 +217,12 @@ class CopyTransform extends Transform {
         });
       });
   }
+}
+
+async function mkdirp(p: string): Promise<string | undefined> {
+  let status: fs.Stats | null = null;
+  try {
+    status = await fs.promises.stat(p);
+  } catch {}
+  return !status ? fs.promises.mkdir(p, { recursive: true }) : await Promise.resolve(undefined);
 }

@@ -1,20 +1,16 @@
 import test from 'tape';
 import fs from 'fs';
 import { glob } from 'tinyglobby';
-import { mkdirp } from 'mkdirp';
+import { mkdirp } from './fsutils.js';
 import { rimraf } from 'rimraf';
 import copyfiles, { CopyFilesOptions } from '../src/index.js';
-
-function mkdirpAsync(p: string) {
-  return mkdirp(p);
-}
 
 function after(t: test.Test) {
   rimraf('output').then(() => rimraf('input').then(() => t.end()));
 }
 
 function before(t: test.Test) {
-  mkdirpAsync('input/other').then(() => t.end());
+  mkdirp('input/other').then(() => t.end());
 }
 
 test('normal', t => {
@@ -109,7 +105,7 @@ test('error on nothing copied', t => {
 test('soft', t => {
   t.test('setup', before);
   t.test('copy stuff', t => {
-    mkdirpAsync('output/input/other').then(() => {
+    mkdirp('output/input/other').then(() => {
       fs.writeFileSync('input/a.txt', 'inputA');
       fs.writeFileSync('output/input/a.txt', 'outputA');
       t.equal(fs.readFileSync('output/input/a.txt').toString(), 'outputA');
