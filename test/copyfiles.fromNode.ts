@@ -1,6 +1,6 @@
 import test from 'tape';
 import fs from 'fs';
-import { glob } from 'glob';
+import { glob } from 'tinyglobby';
 import { mkdirp } from 'mkdirp';
 import { rimraf } from 'rimraf';
 import copyfiles, { CopyFilesOptions } from '../src/index.js';

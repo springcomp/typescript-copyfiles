@@ -2,10 +2,11 @@ import os from 'node:os';
 import { Readable, ReadableOptions, Transform, TransformCallback } from 'stream';
 import { Callback, CopyFilesOptions } from './index.js';
 import fs from 'fs';
-import { glob, GlobOptionsWithFileTypesUnset } from 'glob';
+import { glob, GlobOptions } from 'tinyglobby';
 import { mkdirp } from 'mkdirp';
 import path from 'path';
 
+type GlobOptionsWithPatternsUnset = Omit<GlobOptions, 'patterns'>;
 type CopyStatus = { copied: boolean };
 type Logger = (text: string) => void;
 type PathStat = {
@@ -29,7 +30,7 @@ export class CopyFilesStreamHandler {
     const up = options?.up ?? 0;
     const verbose = options?.verbose ?? false;
 
-    const globOpts: GlobOptionsWithFileTypesUnset = {};
+    const globOpts: GlobOptionsWithPatternsUnset = {};
     if (options?.exclude) {
       globOpts.ignore = options.exclude;
     }
@@ -37,7 +38,7 @@ export class CopyFilesStreamHandler {
       globOpts.dot = true;
     }
     if (options?.follow) {
-      globOpts.follow = true;
+      globOpts.followSymbolicLinks = true;
     }
 
     const logger = this.makeConsoleLogger(verbose);
@@ -95,8 +96,8 @@ class ToStream extends Readable {
 }
 class UnglobTransform extends Transform {
   private logger: Logger;
-  private globOpts: GlobOptionsWithFileTypesUnset;
-  constructor(globOpts: GlobOptionsWithFileTypesUnset, logger: Logger) {
+  private globOpts: GlobOptionsWithPatternsUnset;
+  constructor(globOpts: GlobOptionsWithPatternsUnset, logger: Logger) {
     super();
     this.logger = logger;
     this.globOpts = globOpts;

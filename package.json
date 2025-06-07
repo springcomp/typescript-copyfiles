@@ -22,6 +22,7 @@
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^22.15.17",
     "@types/tape": "^5.8.1",
+    "@types/yargs": "^17.0.33",
     "rimraf": "^6.0.1",
     "tap-spec": "^2.2.2",
     "tape": "^5.9.0",
@@ -39,9 +40,8 @@
   },
   "homepage": "https://github.com/springcomp/typescript-copyfiles#readme",
   "dependencies": {
-    "@types/yargs": "^17.0.33",
-    "glob": "^11.0.2",
     "mkdirp": "^3.0.1",
+    "tinyglobby": "^0.2.14",
     "yargs": "^17.7.2"
   }
 }
