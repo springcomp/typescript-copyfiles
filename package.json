@@ -1,6 +1,6 @@
 {
-  "name": "@springcomp/typescript-copyfiles",
-  "version": "1.6.0",
+  "name": "@springcomp/copyfiles",
+  "version": "1.0.0",
   "description": "Copy files easily.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -8,10 +8,7 @@
     "copyup": "dist/bin/copyfiles.js",
     "copyfiles": "dist/bin/copyfiles.js"
   },
-  "files": [
-    "dist",
-    "dist/types"
-  ],
+  "files": ["dist", "dist/types"],
   "type": "module",
   "scripts": {
     "prebuild": "npx rimraf dist",
