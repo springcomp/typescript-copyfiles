@@ -1,8 +1,7 @@
 import test from 'tape';
 import fs from 'fs';
 import { glob } from 'tinyglobby';
-import { mkdirp } from './fsutils.js';
-import { rimraf } from 'rimraf';
+import { mkdirp, rimraf } from './fsutils.js';
 import copyfiles, { CopyFilesOptions } from '../src/index.js';
 
 function after(t: test.Test) {
