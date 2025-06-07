@@ -46,4 +46,40 @@ export function copyFiles(args: string[], config: CopyFilesOptions | Callback, c
   handler.copyFiles(args, callback, config);
 }
 
-export default copyFiles;
+// Async wrapper for copyFiles (callback-based to Promise-based)
+function copyfilesAsync(args: string[], opts?: CopyFilesOptions): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (typeof opts === 'function' || opts === undefined) {
+      copyFiles(args, err => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    } else {
+      copyFiles(args, opts, err => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    }
+  });
+}
+
+// Attach to the main export for promises-style usage
+export interface CopyFilesWithPromises {
+  (...args: Parameters<typeof copyFiles>): ReturnType<typeof copyFiles>;
+  promises: {
+    copyfiles: typeof copyfilesAsync;
+  };
+}
+
+const copyfilesExport = copyFiles as CopyFilesWithPromises;
+copyfilesExport.promises = {
+  copyfiles: copyfilesAsync,
+};
+
+export default copyfilesExport;
